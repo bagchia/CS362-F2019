@@ -38,7 +38,9 @@ unittest1: unittest2.c dominion.o rngs.o interface.o
 
 unittestresults: unittest1 unittest2
 	unittest1 > unittestresults.out
-	echo -e "\n\nCoverage Results:\n\n" >> unittestresults.out
+	echo -e "\n\n" >> unittestresults.out
+	unittest2 >> unittestresults.out
+	echo -e "\n\nCoverage Results:\n" >> unittestresults.out
 	gcov dominion.gcda -b -f >> unittestresults.out
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
