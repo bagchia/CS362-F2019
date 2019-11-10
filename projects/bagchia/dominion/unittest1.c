@@ -6,10 +6,10 @@
 #include <stdio.h>
 #include <assert.h>
 #include "rngs.h"
-#define DEBUG
 
 int main()
 {
+    printf("Unit Test 1: Baron\n");
     int r, i;
     int seed = 2;
     int handCount = 5;
@@ -57,15 +57,53 @@ int main()
     test_bool(G.playedCardCount == old_played_count + 1, "Number of played cards increased by 1");
     test_bool(count_array(G.playedCards, G.playedCardCount, baron) == 1, "Played pile contains exactly 1 baron");
     test_bool(G.coins == old_coins + 4, "Coins increased by 4");
-    printf("Play the baron and choose to gain an estate\n");
 
+    G.hand[0][0] = baron;
+    printf("Play the baron and choose to gain an estate\n");
+    int old_deck_count = G.deckCount[0];
+    int old_estates_deck = count_array(G.deck[0], G.deckCount[0], estate);
+    int old_estate_supply_count = supplyCount(estate, &G);
     old_hand_count = G.handCount[0];
     old_discard_count = G.discardCount[0];
     old_played_count = G.playedCardCount;
     old_coins = G.coins;
-    test_bool(G.handCount[0] == old_hand_count - 1, "Player's handcount has decreased by 1 (1 for estate and 1 for baron)");
+    baronEffect(0, &G);
+    test_bool(G.handCount[0] == old_hand_count - 1, "Player's handcount has decreased by 1");
     test_bool(count_array(G.hand[0], G.handCount[0], estate) == 1, "Exactly one estate still remaining in hand");
     test_bool(G.playedCardCount == old_played_count + 1, "Number of played cards increased by 1");
     test_bool(count_array(G.playedCards, G.playedCardCount, baron) == 1, "Played pile contains exactly 1 baron");
     test_bool(G.coins == old_coins, "Coins remains the same");
+    test_bool(G.deckCount == old_deck_count + 1, "Player's deck size increased by one");
+    test_bool(count_array(G.deck[0], G.deckCount[0], estate) == old_estates_deck + 1, "One more estate in the player's deck");
+    test_bool(supplyCount(estate, &G) == old_estate_supply_count - 1, "Number of estates in supply decremented by one");
+    test_bool(isGameOver(&G) != 1, "Gameover condition is not met");
+
+    G.hand[0][3] = copper;
+    G.hand[0][3] = copper;
+    printf("Play the baron and choose to discard an estate with no estates remaining in the hand (should gain estate in deck)\n");
+    old_deck_count = G.deckCount[0];
+    old_estates_deck = count_array(G.deck[0], G.deckCount[0], estate);
+    old_estate_supply_count = supplyCount(estate, &G);
+    old_hand_count = G.handCount[0];
+    old_discard_count = G.discardCount[0];
+    old_played_count = G.playedCardCount;
+    old_coins = G.coins;
+    baronEffect(1, &G);
+    test_bool(G.handCount[0] == old_hand_count - 1, "Player's handcount has decreased by 1");
+    test_bool(count_array(G.hand[0], G.handCount[0], estate) == 0, "Exactly zero estate still remaining in hand");
+    test_bool(G.playedCardCount == old_played_count + 1, "Number of played cards increased by 1");
+    test_bool(count_array(G.playedCards, G.playedCardCount, baron) == 1, "Played pile contains exactly 1 baron");
+    test_bool(G.coins == old_coins, "Coins remains the same");
+    test_bool(G.deckCount == old_deck_count + 1, "Player's deck size increased by one");
+    test_bool(count_array(G.deck[0], G.deckCount[0], estate) == old_estates_deck + 1, "One more estate in the player's deck");
+    test_bool(supplyCount(estate, &G) == old_estate_supply_count - 1, "Number of estates in supply decremented by one");
+    test_bool(isGameOver(&G) != 1, "Gameover condition is not met");
+
+    G.supplyCount[sea_hag] = 0;
+    G.supplyCount[mine] = 0;
+    G.supplyCount[estate] = 1;
+    G.hand[0][3] = copper;
+    printf("Play the baron and choose to gain an estate as it depletes the third supply\n");
+    baronEffect(0, &G);
+    test_bool(isGameOver(&G) == 1, "Gameover condition is met");
 }

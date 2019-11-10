@@ -31,6 +31,14 @@ testUpdateCoins: testUpdateCoins.c dominion.o rngs.o
 	gcc -o testUpdateCoins -g  testUpdateCoins.c dominion.o rngs.o $(CFLAGS)
 
 unittest1: unittest1.c dominion.o rngs.o interface.o
-	gcc -o unittest1 -g  unittest1.c interface.o dominion.o rngs.o $(CFLAGS)
+	gcc -o unittest1 -g  unittest1.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
+
+unittest1: unittest2.c dominion.o rngs.o interface.o
+	gcc -o unittest2 -g  unittest2.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
+
+unittestresults: unittest1 unittest2
+	unittest1 > unittestresults.out
+	echo -e "\n\nCoverage Results:\n\n" >> unittestresults.out
+	gcov dominion.gcda -b -f >> unittestresults.out
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
