@@ -5,7 +5,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-//Modified assignment 2
+//Modified assignment 3
 
 int compare(const void *a, const void *b)
 {
