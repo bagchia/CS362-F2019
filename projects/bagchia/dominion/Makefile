@@ -33,13 +33,28 @@ testUpdateCoins: testUpdateCoins.c dominion.o rngs.o
 unittest1: unittest1.c dominion.o rngs.o interface.o
 	gcc -o unittest1 -g  unittest1.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
 
-unittest1: unittest2.c dominion.o rngs.o interface.o
+unittest2: unittest2.c dominion.o rngs.o interface.o
 	gcc -o unittest2 -g  unittest2.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
 
-unittestresults: unittest1 unittest2
+unittest3: unittest3.c dominion.o rngs.o interface.o
+	gcc -o unittest3 -g  unittest3.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
+
+unittest4: unittest4.c dominion.o rngs.o interface.o
+	gcc -o unittest4 -g  unittest4.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
+
+unittest5: unittest5.c dominion.o rngs.o interface.o
+	gcc -o unittest5 -g  unittest5.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
+
+unittestresults: unittest1 unittest2 unittest3 unittest4 unittest5
 	unittest1 > unittestresults.out
 	echo -e "\n\n" >> unittestresults.out
 	unittest2 >> unittestresults.out
+	echo -e "\n\n" >> unittestresults.out
+	unittest3 >> unittestresults.out
+	echo -e "\n\n" >> unittestresults.out
+	unittest4 >> unittestresults.out
+	echo -e "\n\n" >> unittestresults.out
+	unittest5 >> unittestresults.out
 	echo -e "\n\nCoverage Results:\n" >> unittestresults.out
 	gcov dominion.gcda -b -f >> unittestresults.out
 clean:

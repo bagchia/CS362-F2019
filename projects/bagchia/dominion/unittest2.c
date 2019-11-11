@@ -54,12 +54,12 @@ int main()
     
     //Give another player > 5 cards
     G.handCount[2] = 6;
-    G.hand[1][0] = copper;
-    G.hand[1][1] = copper;
-    G.hand[1][2] = copper;
-    G.hand[1][3] = gold;
-    G.hand[1][4] = gold;
-    G.hand[1][5] = gold;
+    G.hand[2][0] = copper;
+    G.hand[2][1] = copper;
+    G.hand[2][2] = copper;
+    G.hand[2][3] = gold;
+    G.hand[2][4] = gold;
+    G.hand[2][5] = gold;
 
     printf("Play the minion and opt to recieve 2 coins\n");
     int old_coins = G.coins;

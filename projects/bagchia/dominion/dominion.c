@@ -867,8 +867,8 @@ int ambassadorEffect(int choice1, int choice2, struct gameState *state, int hand
 {
     int currentPlayer = whoseTurn(state);
     int i, j;
-    //BUG
-    // j = 0; //used to check if player has enough cards to discard
+    //BUG changed to j=100 to prevent crashes
+    j = 100; //used to check if player has enough cards to discard
 
     if (choice2 > 2 || choice2 < 0)
     {
@@ -931,11 +931,11 @@ int tributeEffect(struct gameState *state)
 {
     int currentPlayer = whoseTurn(state);
     int nextPlayer = currentPlayer+1;
-    //BUG
-    // if (nextPlayer > (state->numPlayers - 1))
-    // {
-    //     nextPlayer = 0;
-    // }
+    //BUG uncommented because crash
+    if (nextPlayer > (state->numPlayers - 1))
+    {
+        nextPlayer = 0;
+    }
     int i;
     int tributeRevealedCards[2] = {-1, -1};
     if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1)
