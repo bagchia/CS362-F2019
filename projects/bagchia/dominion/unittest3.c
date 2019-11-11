@@ -75,4 +75,7 @@ int main()
     printf("Play the ambassador with an invalid choice\n");
     return_value = ambassadorEffect(2, 1000, &G, 0);
     test_bool(return_value == -1, "Return value should equal -1");
+    printf("Play the ambassador with the ambassador itself\n");
+    return_value = ambassadorEffect(0, 1, &G, 0);
+    test_bool(return_value == -1, "Return value should equal -1");
 }
