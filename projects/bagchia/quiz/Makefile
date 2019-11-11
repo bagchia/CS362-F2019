@@ -1,3 +1,6 @@
-testme: testme.c
+testme: testme.c FORCE
 	gcc -o testme testme.c -coverage
-	testme
+	testme || true
+	gcov testme.gcda
+
+FORCE:
