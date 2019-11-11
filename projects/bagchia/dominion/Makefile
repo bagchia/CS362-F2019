@@ -57,5 +57,6 @@ unittestresults: clean unittest1 unittest2 unittest3 unittest4 unittest5
 	unittest5 >> unittestresults.out
 	echo -e "\n\nCoverage Results:\n" >> unittestresults.out
 	gcov dominion.gcda -b -f >> unittestresults.out
+
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
