@@ -1,0 +1,70 @@
+        -:    0:Source:testme.c
+        -:    0:Graph:testme.gcno
+        -:    0:Data:testme.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    0:Source is newer than graph
+        -:    1:#include<stdio.h>
+        -:    2:#include<string.h>
+        -:    3:#include<stdlib.h>
+        -:    4:#include<time.h>
+        -:    5:
+       68:    6:char inputChar()
+        -:    7:{
+        -:    8:    static const char pool [9] = {'[', '{', '(', ' ', 'a', 'x', ')', '}', ']'};
+       68:    9:    char index = rand() % 9;
+       68:   10:    return pool[index];
+        -:   11:}
+        -:   12:
+       68:   13:char *inputString()
+        -:   14:{
+        -:   15:  static const char pool [4] = {'r', 'e', 's', 't'};
+        -:   16:  static char returned_string[6];
+        -:   17:  int i;
+      408:   18:    for(i = 0; i<5; i++){
+      340:   19:      returned_string[i] = pool[rand() % 4];
+        -:   20:    }
+       68:   21:    returned_string[5] = '\0';
+       68:   22:    return returned_string;
+        -:   23:}
+        -:   24:
+        1:   25:void testme()
+        -:   26:{
+        1:   27:  int tcCount = 0;
+        -:   28:  char *s;
+        -:   29:  char c;
+        1:   30:  int state = 0;
+        -:   31:  while (1)
+        -:   32:  { 
+       68:   33:    tcCount++;
+       68:   34:    c = inputChar();
+       68:   35:    s = inputString();
+       68:   36:    printf("Iteration %d: c = %c, s = %s, state = %d\n", tcCount, c, s, state);
+        -:   37:
+       68:   38:    if (c == '[' && state == 0) state = 1;
+       68:   39:    if (c == '(' && state == 1) state = 2;
+       68:   40:    if (c == '{' && state == 2) state = 3;
+       68:   41:    if (c == ' '&& state == 3) state = 4;
+       68:   42:    if (c == 'a' && state == 4) state = 5;
+       68:   43:    if (c == 'x' && state == 5) state = 6;
+       68:   44:    if (c == '}' && state == 6) state = 7;
+       68:   45:    if (c == ')' && state == 7) state = 8;
+       68:   46:    if (c == ']' && state == 8) state = 9;
+       68:   47:    if (s[0] == 'r' && s[1] == 'e'
+        7:   48:       && s[2] == 's' && s[3] == 'e'
+        1:   49:       && s[4] == 't' && s[5] == '\0'
+        1:   50:       && state == 9)
+        -:   51:    {
+        1:   52:      printf("error ");
+        1:   53:      exit(200);
+        -:   54:    }
+       67:   55:  }
+        -:   56:}
+        -:   57:
+        -:   58:
+        1:   59:int main(int argc, char *argv[])
+        -:   60:{
+        1:   61:    srand(time(NULL));
+        1:   62:    testme();
+    #####:   63:    return 0;
+        -:   64:}
