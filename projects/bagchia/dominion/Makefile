@@ -45,7 +45,7 @@ unittest4: unittest4.c dominion.o rngs.o interface.o
 unittest5: unittest5.c dominion.o rngs.o interface.o
 	gcc -o unittest5 -g  unittest5.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
 
-unittestresults: unittest1 unittest2 unittest3 unittest4 unittest5
+unittestresults: clean unittest1 unittest2 unittest3 unittest4 unittest5
 	unittest1 > unittestresults.out
 	echo -e "\n\n" >> unittestresults.out
 	unittest2 >> unittestresults.out
