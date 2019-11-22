@@ -55,9 +55,6 @@ int main()
                 G.hand[j][k] = rand_range(curse, treasure_map);
             }
         }
-
-        int old_hand_p2[G.handCount[1]];
-        memcpy(old_hand_p2, G.hand[1], sizeof(int) * G.handCount[1]);
         int revealed_cards[2] = {G.hand[1][0], G.hand[0][1]};
         G.hand[0][0] = tribute;
         int num_treasure;
@@ -85,8 +82,7 @@ int main()
         int old_played_count = G.playedCardCount;
         int old_deck_count = G.deckCount[0];
         int old_p2_deck_count = G.deckCount[1];
-        int num_minions = count_array(G.hand[0], G.handCount[0], minion);
-        int played_minions = count_array(G.playedCards, G.playedCardCount, minion);
+        int played_tributes = count_array(G.playedCards, G.playedCardCount, tribute);
         int old_hand[G.handCount[0]];
         memcpy(old_hand, G.hand[0], sizeof(int) * G.handCount[0]);
 
@@ -97,5 +93,7 @@ int main()
         test_bool(G.numActions == old_num_actions + 2*num_action, "Player gained the appropriate number of actions");
         test_bool(G.deckCount[0] == old_deck_count + 2*num_victory, "Player gained the approrpriate number of cards");
         test_bool(G.deckCount[1] == old_p2_deck_count -2, "Left player discarded 2 cards");
+        test_bool(memcmp(old_hand, G.hand[0], sizeof(int) * G.handCount[0]) != 0, "Left player got a new hand");
+        test_bool(count_array(G.playedCards, G.playedCardCount, tribute) == played_tributes + 1, "There is exactly 1 more tribute in the played cards");
     }
 }
