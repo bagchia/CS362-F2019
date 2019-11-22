@@ -37,13 +37,18 @@ randomtestcard1: randomtestcard1.c dominion.o rngs.o interface.o
 randomtestcard2: randomtestcard2.c dominion.o rngs.o interface.o
 	gcc -o randomtestcard2 -g  randomtestcard2.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
 
-unittestresults: clean randomtestcard1 randomtestcard2
-	randomtestcard1 > unittestresults.out
-	echo -e "\n\n" >> unittestresults.out
-	randomtestcard2 >> unittestresults.out
-	echo -e "\n\n" >> unittestresults.out
-	echo -e "\n\nCoverage Results:\n" >> unittestresults.out
-	gcov dominion.gcda -b -f >> unittestresults.out
+randomtestcard3: randomtestcard3.c dominion.o rngs.o interface.o
+	gcc -o randomtestcard3 -g  randomtestcard3.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
+
+randomtestresults: clean randomtestcard1 randomtestcard2 randomtestcard3
+	randomtestcard1 > randomtestresults.out
+	echo -e "\n\n" >> randomtestresults.out
+	randomtestcard2 >> randomtestresults.out
+	echo -e "\n\n" >> randomtestresults.out
+	randomtestcard3 >> randomtestresults.out
+
+	echo -e "\n\nCoverage Results:\n" >> randomtestresults.out
+	gcov dominion.gcda -b -f >> randomtestresults.out
 
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
