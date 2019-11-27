@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <assert.h>
+#include <time.h>
 #include "rngs.h"
 
 #define NUM_ITERATIONS 1000;
@@ -88,7 +89,7 @@ int main()
 
         printHand(1, &G);
         printf("Playing Tribute\n");
-        playTribute(0, 0, 0, &G, 0, NULL, 0);
+        cardEffect(tribute, 0, 0, 0, &G, 0, NULL);
         test_bool(G.coins = old_coins + 2*num_treasure, "Player gained the appropriate amount of gold");
         test_bool(G.numActions == old_num_actions + 2*num_action, "Player gained the appropriate number of actions");
         test_bool(G.deckCount[0] == old_deck_count + 2*num_victory, "Player gained the approrpriate number of cards");

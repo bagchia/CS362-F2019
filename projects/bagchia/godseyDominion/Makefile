@@ -55,8 +55,7 @@ unittestresults: clean unittest1 unittest2 unittest3 unittest4 unittest5
 	unittest4 >> unittestresults.out
 	echo -e "\n\n" >> unittestresults.out
 	unittest5 >> unittestresults.out
-	echo -e "\n\nCoverage Results:\n" >> unittestresults.out
-	gcov dominion.gcda -b -f >> unittestresults.out
+
 
 
 randomtestcard1: randomtestcard1.c dominion.o rngs.o interface.o
@@ -74,6 +73,10 @@ randomtestresults: clean randomtestcard1 randomtestcard2 randomtestcard3
 	randomtestcard2 >> randomtestresults.out
 	echo -e "\n\n" >> randomtestresults.out
 	randomtestcard3 >> randomtestresults.out
+
+alltests: clean randomtestresults unittestresults
+	echo -e "\n\nCoverage Results:\n" > coverageresults.out
+	gcov dominion.gcda -b -f >> coverageresults.out
 
 
 clean:
