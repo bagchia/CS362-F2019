@@ -10,7 +10,7 @@
 int main()
 {
     srand(time(NULL));
-    printf("Unit Test 7: Feast card incorrectly decides which cards are too expensive\n");
+    printf("Unit Test 8: Tribute revealed cards reward calculation behaves unpredictably\n");
     int r, i;
     int seed = 2;
     // set your card array
@@ -34,39 +34,29 @@ int main()
     //
     memset(&G, 23, sizeof(struct gameState)); // set the game state
     r = initializeGame(2, kingdom, seed, &G); // initialize a new game
-    G.hand[0][0] = feast;
-    G.handCount[0] = 1;
-    G.deckCount[0] = 0;
-    G.discardCount[0] = 0;
-    G.coins = 0;
-    
-    printHand(0, &G);
-    printDeck(0, &G);
-    printDiscard(0, &G);
-    int old_num_feasts_hand = count_array(G.hand[0], G.handCount[0], feast);
-    int old_num_estates_deck = count_array(G.deck[0], G.deckCount[0], estate);
+    G.hand[0][0] = tribute;
+    G.deck[0][0] = copper;
+    G.deck[0][1] = silver;
     int old_deck_count = G.deckCount[0];
     int old_hand_count = G.handCount[0];
+    int old_actions = G.numActions;
     int old_coins = G.coins;
     int bonus = 0;
     int old_bonus = bonus;
 
+    
     printHand(0, &G);
     printDeck(0, &G);
     printDiscard(0, &G);
 
-    printf("Playing player 0's feast for an estate\n");
 
-    cardEffect(feast, estate, 0 , 0, &G, 0, &bonus);
+    printf("Playing player 0's tribute\n");
 
-    test_bool(count_array(G.hand[0], G.handCount[0], feast) == old_num_feasts_hand - 1, "1 less feast in player 0's hand");
-    test_bool(count_array(G.deck[0], G.deckCount[0], estate) == old_num_estates_deck + 1, "1 more estate in player 0's deck");
-    test_bool(G.deckCount[0] == old_deck_count + 1, "Player 0's deck size increased by 1");
-    test_bool(G.handCount[0] == old_hand_count - 1, "Player 0's hand size decreased by 1");
-    test_bool(G.coins == old_coins, "Coins are unchanged");
-    test_bool(bonus == old_bonus, "Bonus is unchanged");
+    cardEffect(tribute, 0, 0 ,0, &G, 0, &bonus);
 
-    printHand(0, &G);
-    printDeck(0, &G);
-    printDiscard(0, &G);
+    test_bool(bonus == old_bonus + 4, "Bonus has increased by exactly 4");
+    test_bool(G.numActions == old_actions, "Number of actions are the same");
+    test_bool(G.handCount[0] == old_hand_count, "Number of cards in hand stays the same");
+
+
 }

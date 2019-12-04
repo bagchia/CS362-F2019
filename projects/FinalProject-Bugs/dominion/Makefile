@@ -21,22 +21,42 @@ runtests: testDrawCard
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
+unittest1: unittest1.c dominion.o rngs.o interface.o
+	gcc -o unittest1 -g  unittest1.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
+
+unittest2: unittest2.c dominion.o rngs.o interface.o
+	gcc -o unittest2 -g  unittest2.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
+
+unittest3: unittest3.c dominion.o rngs.o interface.o
+	gcc -o unittest3 -g  unittest3.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
+
+unittest4: unittest4.c dominion.o rngs.o interface.o
+	gcc -o unittest4 -g  unittest4.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
+
+unittest5: unittest5.c dominion.o rngs.o interface.o
+	gcc -o unittest5 -g  unittest5.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
+
 unittest6: unittest6.c dominion.o rngs.o interface.o
 	gcc -o unittest6 -g  unittest6.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
 
 unittest7: unittest7.c dominion.o rngs.o interface.o
 	gcc -o unittest7 -g  unittest7.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
 
-unittest8: unittest8.c dominion.o rngs.o interface.o
-	gcc -o unittest8 -g  unittest8.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
 
-
-unittestresults: clean unittest_bug6 unittest_bug7 unittest_bug8
-	unittest_bug6 > unittestresults.out
+unittestresults: clean unittest1 unittest2 unittest3 unittest4 unittest5 unittest6 unittest7
+	unittest1 > unittestresults.out
 	echo -e "\n\n" >> unittestresults.out
-	unittest_bug7 >> unittestresults.out
+	unittest2 >> unittestresults.out
 	echo -e "\n\n" >> unittestresults.out
-	unittest_bug8 >> unittestresults.out
+	unittest3 >> unittestresults.out
+	echo -e "\n\n" >> unittestresults.out
+	unittest4 >> unittestresults.out
+	echo -e "\n\n" >> unittestresults.out
+	unittest5 >> unittestresults.out
+	echo -e "\n\n" >> unittestresults.out
+	unittest6 >> unittestresults.out
+	echo -e "\n\n" >> unittestresults.out
+	unittest7 >> unittestresults.out
 	echo -e "\n\n" >> unittestresults.out
 
 	echo -e "\n\nCoverage Results:\n" >> unittestresults.out

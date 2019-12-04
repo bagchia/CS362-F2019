@@ -10,9 +10,9 @@
 int main()
 {
     srand(time(NULL));
-    printf("Unit Test 8: Tribute revealed cards reward calculation behaves unpredictably\n");
+    printf("Unit Test 6: Score is incorrectly calculated using the discard pile size when enumerating the player’s deck\n");
     int r, i;
-    int seed = 2;
+    int seed = 2 ;
     // set your card array
     int kingdom[10] = {adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall};
     // declare the game state
@@ -34,29 +34,22 @@ int main()
     //
     memset(&G, 23, sizeof(struct gameState)); // set the game state
     r = initializeGame(2, kingdom, seed, &G); // initialize a new game
-    G.hand[0][0] = tribute;
-    G.deck[0][0] = copper;
-    G.deck[0][1] = silver;
-    int old_deck_count = G.deckCount[0];
-    int old_hand_count = G.handCount[0];
-    int old_actions = G.numActions;
-    int old_coins = G.coins;
-    int bonus = 0;
-    int old_bonus = bonus;
+    G.hand[0][0] = curse;
+    G.handCount[0] = 1;
+    G.discard[0][0] = province;
+    G.discardCount[0] = 1;
+    G.deck[0][0] = estate;
+    G.deck[0][1] = estate;
+    G.deck[0][2] = estate;
+    G.deckCount[0] = 3;
 
-    
     printHand(0, &G);
     printDeck(0, &G);
     printDiscard(0, &G);
 
+    printf("Calculating player 0's score\n");
 
-    printf("Playing player 0's tribute\n");
-
-    cardEffect(tribute, 0, 0 ,0, &G, 0, &bonus);
-
-    test_bool(bonus == old_bonus + 4, "Bonus has increased by exactly 4");
-    test_bool(G.numActions == old_actions, "Number of actions are the same");
-    test_bool(G.handCount[0] == old_hand_count, "Number of cards in hand stays the same");
-
-
+    int score = scoreFor(0, &G);
+    test_bool(score == 8, "Player 0's score is exactly 8");
+    
 }
