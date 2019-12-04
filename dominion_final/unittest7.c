@@ -33,7 +33,7 @@ int main()
     // comment on what this is going to test
     //
     memset(&G, 23, sizeof(struct gameState)); // set the game state
-    r = initializeGame(1, kingdom, seed, &G); // initialize a new game
+    r = initializeGame(2, kingdom, seed, &G); // initialize a new game
     G.hand[0][0] = feast;
     G.handCount[0] = 1;
     G.deckCount[0] = 0;
@@ -55,9 +55,9 @@ int main()
     printDeck(0, &G);
     printDiscard(0, &G);
 
-    printf("Playing player 0's feast for an estate");
+    printf("Playing player 0's feast for an estate\n");
 
-    cardEffect(feast, estate, 0 ,0, &G, 0, &bonus);
+    cardEffect(feast, estate, 0 , 0, &G, 0, &bonus);
 
     test_bool(count_array(G.hand[0], G.handCount[0], feast) == old_num_feasts_hand - 1, "1 less feast in player 0's hand");
     test_bool(count_array(G.deck[0], G.deckCount[0], estate) == old_num_estates_deck + 1, "1 more estate in player 0's deck");

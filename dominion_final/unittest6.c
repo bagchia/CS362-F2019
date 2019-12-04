@@ -33,7 +33,7 @@ int main()
     // comment on what this is going to test
     //
     memset(&G, 23, sizeof(struct gameState)); // set the game state
-    r = initializeGame(1, kingdom, seed, &G); // initialize a new game
+    r = initializeGame(2, kingdom, seed, &G); // initialize a new game
     G.hand[0][0] = curse;
     G.handCount[0] = 1;
     G.discard[0][0] = province;

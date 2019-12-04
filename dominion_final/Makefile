@@ -21,17 +21,22 @@ runtests: testDrawCard
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
-unittest_bug6: unittest_bug6.c dominion.o rngs.o interface.o
-	gcc -o unittest_bug6 -g  unittest_bug6.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
+unittest6: unittest6.c dominion.o rngs.o interface.o
+	gcc -o unittest6 -g  unittest6.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
 
-unittest_bug7: unittest_bug7.c dominion.o rngs.o interface.o
-	gcc -o unittest_bug7 -g  unittest_bug7.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
+unittest7: unittest7.c dominion.o rngs.o interface.o
+	gcc -o unittest7 -g  unittest7.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
+
+unittest8: unittest8.c dominion.o rngs.o interface.o
+	gcc -o unittest8 -g  unittest8.c interface.o dominion.o rngs.o -coverage $(CFLAGS)
 
 
-unittestresults: clean unittest_bug6 unittest_bug7
+unittestresults: clean unittest_bug6 unittest_bug7 unittest_bug8
 	unittest_bug6 > unittestresults.out
 	echo -e "\n\n" >> unittestresults.out
 	unittest_bug7 >> unittestresults.out
+	echo -e "\n\n" >> unittestresults.out
+	unittest_bug8 >> unittestresults.out
 	echo -e "\n\n" >> unittestresults.out
 
 	echo -e "\n\nCoverage Results:\n" >> unittestresults.out
