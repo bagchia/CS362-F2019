@@ -48,8 +48,10 @@ int test_bug_10(){
         }
     }
     if(wrong_count > 0){
-        printf("\ncards weren't successfully removed from hand\n");
+        printf("\ncards weren't properly removed from hand\n");
         successful = 0;
+    }else{
+        printf("\ncards were properly removed from hand\n");
     }
     if(successful){
         printf("\nSuccess! Unit test for bug 10 passed.\n");

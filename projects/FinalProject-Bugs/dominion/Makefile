@@ -67,8 +67,6 @@ unittestresults: clean unittest1 unittest2 unittest3 unittest4 unittest5 unittes
 	echo -e "\n\n" >> unittestresults.out
 	unittest7 >> unittestresults.out
 	echo -e "\n\n" >> unittestresults.out
-	unittest7 >> unittestresults.out
-	echo -e "\n\n" >> unittestresults.out
 	unittest8 >> unittestresults.out
 	echo -e "\n\n" >> unittestresults.out
 	unittest9 >> unittestresults.out

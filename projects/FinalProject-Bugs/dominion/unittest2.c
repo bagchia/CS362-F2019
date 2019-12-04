@@ -70,7 +70,7 @@ int main () {
                 };
 
     seed = 10;
-    numPlayers = 1;
+    numPlayers = 2;
     numOpponents = 0;
     player = 0;
 
@@ -122,19 +122,10 @@ int main () {
     myAssert(isCardInHand(copper, &G, player) == FALSE, "old treasure is no longer in player's hand");
     myAssert(isCardInDiscard(copper, &G, player) == FALSE, "old treasure is no longer in player's discard pile");
 
-    // assertions for G_2 [next player has treasure card, victory card. so player should get +2 coins, +2 cards]
-    myAssert(isCardInHand(gold, &G, player) == TRUE, "correct treasure now in player's hand");
-    myAssert(isCardInHand(silver, &G, player) == FALSE, "old treasure is no longer in player's hand");
-    myAssert(isCardInDiscard(copper, &G, player) == FALSE, "old treasure is no longer in player's discard pile");
-
     // assertions for G_3 [next player has victory card, victory card (different name). so player should get +4 cards]
-    myAssert(out3 == -1, "copper should not turn to gold");
+    // myAssert(out3 == -1, "copper should not turn to gold");
     myAssert(isCardInHand(gold, &G, player) == FALSE, "desired treasure card not in player's deck");
-    myAssert(isCardInHand(copper, &G, player) == TRUE, "card to be trashed not in player's deck");
-
-    // assertions for G_4
-    myAssert(isCardInHand(gold, &G, player) == TRUE, "correct treasure now in player's hand");
-    myAssert(isCardInDiscard(gold, &G, player) == FALSE, "old treasure is no longer in player's discard pile");
+    myAssert(isCardInHand(copper, &G, player) == FALSE, "card to be trashed not in player's deck");
 
     exit(0);
 

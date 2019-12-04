@@ -70,7 +70,7 @@ int main () {
                 };
 
     seed = 10;
-    numPlayers = 1;
+    numPlayers = 2;
     numOpponents = 0;
     player = 0;
 
@@ -103,9 +103,9 @@ int main () {
     G.supplyCount[smithy] = 0;
 
     // 2: set other supply piles to 0
-    G.supplyCount[smithy] = 0;
-    G.supplyCount[embargo] = 0;
-    G.supplyCount[council_room] = 0;
+    G_2.supplyCount[smithy] = 0;
+    G_2.supplyCount[embargo] = 0;
+    G_2.supplyCount[council_room] = 0;
 
     int out1 = isGameOver(&G);
     int out2 = isGameOver(&G_2);

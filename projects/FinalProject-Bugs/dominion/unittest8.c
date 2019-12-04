@@ -37,6 +37,7 @@ int test_bug_8(){
         printf("\nFailure! Unit test for bug 8 failed!\n");
     }
     else{
+        printf("\nbonus reported properly\n");
         printf("\nSuccess! Unit test for bug 8 passed\n");
     }
 

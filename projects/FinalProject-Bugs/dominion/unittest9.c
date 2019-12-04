@@ -30,7 +30,7 @@ int test_bug_9(){
     
     initial.deck[1][9] = copper;
     initial.deck[1][8] = copper;
-
+    initial.numActions = 1;
     initial.coins = 3;
     int bonus = 0;
     //run function
@@ -42,14 +42,20 @@ int test_bug_9(){
     if(bonus != 2){
         printf("\nBonus was not updated correctly!\n");
         successful = 0;
+    }else{
+        printf("\nBonus was updated correctly!\n");
     }
     if(r != 0){
         printf("\ncardEffect returned nonzero!\n");
         successful = 0;
+    }else{
+        printf("\ncardEffect properly returned 0\n");
     }
     if(initial.numActions != 1){
-        printf("\nplayer was granted actions when they shouldn't have been\n");
+        printf("\nplayer was granted incorrect number of additional actions\n");
         successful = 0;
+    }else{
+        printf("\nplayer was granted correct number of additional actions\n");
     }
     if(successful){
         printf("\nSuccess! Unit test for bug 9 passed.\n");

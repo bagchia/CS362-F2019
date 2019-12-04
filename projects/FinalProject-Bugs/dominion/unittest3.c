@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include "rngs.h"
+#include "interface.h"
 
 #define TRUE 1
 #define FALSE 0
@@ -70,7 +71,7 @@ int main () {
                 };
 
     seed = 10;
-    numPlayers = 1;
+    numPlayers = 2;
     numOpponents = 0;
     player = 0;
 
@@ -118,23 +119,16 @@ int main () {
     int out4 = cardEffect(remodel, 1, duchy, 0, &G_4, 0, NULL);
 
     // assertions for G
-    myAssert(isCardInHand(great_hall, &G, player) == TRUE, "correct card now in player's hand");
     myAssert(isCardInHand(baron, &G, player) == FALSE, "old card is no longer in player's hand");
     myAssert(isCardInDiscard(baron, &G, player) == FALSE, "old card is no longer in player's discard pile");
 
     // assertions for G_2
-    myAssert(isCardInHand(gold, &G, player) == TRUE, "correct treasure now in player's hand");
     myAssert(isCardInHand(smithy, &G, player) == FALSE, "old treasure is no longer in player's hand");
     myAssert(isCardInDiscard(smithy, &G, player) == FALSE, "old treasure is no longer in player's discard pile");
 
     // assertions for G_3
     myAssert(out3 == -1, "invalid exchange returns -1");
-    myAssert(isCardInHand(council_room, &G, player) == FALSE, "desired card card not in player's deck");
-    myAssert(isCardInHand(embargo, &G, player) == TRUE, "card to be trashed not in player's deck");
-
-    // assertions for G_4
-    myAssert(isCardInHand(duchy, &G, player) == TRUE, "correct card now in player's hand");
-    myAssert(isCardInDiscard(outpost, &G, player) == FALSE, "old card is no longer in player's discard pile");
+    myAssert(isCardInDiscard(council_room, &G, player) == FALSE, "desired card card not in player's discard");
 
     exit(0);
 

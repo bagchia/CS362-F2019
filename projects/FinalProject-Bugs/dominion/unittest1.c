@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include "rngs.h"
+#include "interface.h"
 
 #define TRUE 1
 #define FALSE 0
@@ -76,7 +77,7 @@ int main () {
                 };
 
     seed = 10;
-    numPlayers = 1;
+    numPlayers = 2;
     numOpponents = 0;
     player = 0;
 

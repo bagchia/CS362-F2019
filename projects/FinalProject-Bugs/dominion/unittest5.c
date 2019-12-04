@@ -10,7 +10,7 @@
 int main()
 {
     srand(time(NULL));
-    printf("Unit Test 6: Score is incorrectly calculated using the discard pile size when enumerating the player’s deck\n");
+    printf("Unit Test 5: Score is incorrectly calculated using the discard pile size when enumerating the player’s deck\n");
     int r, i;
     int seed = 2 ;
     // set your card array
@@ -43,9 +43,6 @@ int main()
     G.deck[0][2] = estate;
     G.deckCount[0] = 3;
 
-    printHand(0, &G);
-    printDeck(0, &G);
-    printDiscard(0, &G);
 
     printf("Calculating player 0's score\n");
 
