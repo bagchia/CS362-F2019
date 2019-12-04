@@ -12,7 +12,7 @@ int main()
     srand(time(NULL));
     printf("Unit Test 6: Score is incorrectly calculated using the discard pile size when enumerating the player’s deck\n");
     int r, i;
-    int seed = 2;
+    int seed = 2 ;
     // set your card array
     int kingdom[10] = {adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall};
     // declare the game state
