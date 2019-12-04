@@ -1,5 +1,6 @@
 #include "dominion.h"
 #include "dominion_helpers.h"
+#include "test_assert.h"
 #include <string.h>
 #include <stdio.h>
 #include <assert.h>
@@ -10,13 +11,7 @@
 
 int myAssert(int a, char* msg)
 {
-    if(a)
-    {
-        printf("assertion error | %s\n", msg);
-        return 1;
-    }
-    printf("%s\n",msg);
-    return 0;
+    test_bool(a, msg);
 }
 
 int countCardsInHand(int supplyPos, struct gameState *state, int player)

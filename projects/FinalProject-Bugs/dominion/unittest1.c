@@ -1,5 +1,6 @@
 #include "dominion.h"
 #include "dominion_helpers.h"
+#include "test_assert.h"
 #include <string.h>
 #include <stdio.h>
 #include <assert.h>
@@ -123,9 +124,9 @@ int main () {
     int out4 = cardEffect(mine, 1, gold, 0, &G_4, 0, NULL);
 
     // assertions for G [next player has action card, treasure card. so player should get +2 actions, +2 coins]
-    myAssert(isCardInHand(silver, &G, player) == TRUE, "correct treasure now in player's hand");
-    myAssert(isCardInHand(copper, &G, player) == FALSE, "old treasure is no longer in player's hand");
-    myAssert(isCardInDiscard(copper, &G, player) == FALSE, "old treasure is no longer in player's discard pile");
+    test_bool(isCardInHand(silver, &G, player) == TRUE, "correct treasure now in player's hand");
+    test_bool(isCardInHand(copper, &G, player) == FALSE, "old treasure is no longer in player's hand");
+    test_bool(isCardInDiscard(copper, &G, player) == FALSE, "old treasure is no longer in player's discard pile");
 
     exit(0);
 
